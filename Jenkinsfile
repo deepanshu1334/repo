@@ -33,16 +33,17 @@ pipeline {
         }
 
         stage('Deploy') {
-            steps {
-                script {
-                    docker.image('node:18-alpine').inside {
-                        sh '''
-                            npm install -g netlify-cli
-                            netlify --version
-                            netlify deploy --dir=build --prod
-                        '''
-                    }
+            agent {
+                docker {
+                    image 'node:18-alpine'
+                    reuseNode true
                 }
+            }
+            steps {
+                sh '''
+                    npm install netlify-cli
+                    node_modules/.bin/netlify --version
+                '''
             }
         }
     }
