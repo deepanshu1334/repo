@@ -6,7 +6,7 @@ pipeline {
             agent {
                 docker {
                     image 'node:18-alpine'
-                    reuseNode true
+                    // You can choose to remove reuseNode unless needed for your case
                 }
             }
             steps {
@@ -25,7 +25,6 @@ pipeline {
             agent {
                 docker {
                     image 'node:18-alpine'
-                    reuseNode true
                 }
             }
 
@@ -41,14 +40,13 @@ pipeline {
             agent {
                 docker {
                     image 'node:18-alpine'
-                    reuseNode true
                 }
             }
             steps {
                 sh '''
-                    npm install netlify-cli
-                    node_modules/.bin/netlify --version
-                    node_modules/.bin/netlify deploy --dir=build --prod
+                    npm install -g netlify-cli
+                    netlify --version
+                    netlify deploy --dir=build --prod
                 '''
             }
         }
