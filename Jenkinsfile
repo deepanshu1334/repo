@@ -12,6 +12,7 @@ pipeline {
                 script {
                     docker.image('node:18-alpine').inside {
                         sh '''
+                           echo 'hello'
                             ls -la
                             node --version
                             npm --version
