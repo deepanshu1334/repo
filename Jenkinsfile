@@ -4,7 +4,7 @@ pipeline {
     environment{
         NETLIFY_SITE_ID = '83c1fbf2-0d6d-4354-ae24-f88dc4528b4e'
         NETLIFY_AUTH_TOKEN = credentials('netfily-token')
-        REACT_APP_VERSION = '1.2.3'
+        REACT_APP_VERSION = "1.0.$BUILD_ID"
     }
 
     stages {
@@ -57,7 +57,6 @@ pipeline {
             }
         }
 
-
         stage('Deploy prod') {
             agent {
                 docker {
@@ -77,3 +76,4 @@ pipeline {
         }
     }
 }
+
